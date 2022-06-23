@@ -1,0 +1,22 @@
+
+[{
+  "id": 1,
+  "feedProfile":"wanted",
+  "feedImage":"https://source.unsplash.com/random/600x500",
+  "likeNum":1234,
+  "comment":"원티드 - 나답게 일하고 즐겁게 성장하도록"
+},
+{
+  "id": 2,
+  "feedProfile":"frontend",
+  "feedImage":"https://source.unsplash.com/random/900x500",
+  "likeNum":1004,
+  "comment":"인기 IT기업의 실시간 개발자 채용공고를 확인하세요. AI추천 포지션은 서류합격률이 4배 UP. 연봉 상위 10%, 재택근무, 주4일 근무 등 나의 업무스타일에 맞는 멋진 회사를 찾아보세요."
+},
+{
+  "id": 3,
+  "feedProfile":"project",
+  "feedImage":"https://source.unsplash.com/random/700x1080",
+  "likeNum":777,
+  "comment":"특정한 목적을 이루기 위해서 여럿이 함께 모여서 하는 일 또는 작업을 일컫는 말. 여러 가지 종류의 작업이 목적 달성을 위해서 제휴할 수 있을 것, 목적 달성의 기한이 결정되어 있는 것이 주요한 특징이다."
+}]
