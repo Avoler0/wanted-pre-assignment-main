@@ -1,14 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
-import Link from 'react-router-dom';
 // 가이드 네비게이션 바
 const GNB = () => {
-  const [login, setLogin] = useState(false);
-  const input = useRef();
-  useEffect(() => {
-    const check = localStorage.getItem('login_state');
-    if (check) setLogin(true);
-  }, []);
+  const searchRef = useRef();
+
   return (
     <Container>
       <LayOut>
@@ -20,10 +15,10 @@ const GNB = () => {
           <LogoImg src="https://www.instagram.com/static/images/web/logged_out_wordmark.png/7a252de00b20.png" />
         </Logo>
         <SearchWrap>
-          <Input type="text" ref={input} placeholder="검색" />
+          <Input type="text" ref={searchRef} placeholder="검색" />
         </SearchWrap>
         <LoginWrap>
-          {login ? (
+          {localStorage.getItem('login_state') ? (
             <Login
               onClick={() => {
                 localStorage.clear();
@@ -104,9 +99,3 @@ const LoginWrap = styled.div`
 const Login = styled.div`
   cursor: pointer;
 `;
-// const Home = styled.div``;
-// const Direct = styled.div``;
-// const NewPost = styled.div``;
-// const FindPeople = styled.div``;
-// const ActivityFeed = styled.div``;
-// const Profile = styled.div``;

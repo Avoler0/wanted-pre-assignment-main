@@ -2,23 +2,22 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Comments from './Comments';
 const Feeds = ({ feedData }) => {
-  const { id, feedProfile, feedImage, likeNum, comment } = feedData;
-  const [commentsView, setCommentsView] = useState();
-  const inputComment = useRef('');
-  const [commentsCount, setCommentsCount] = useState(0);
-  const [imgLoading, setImgLoading] = useState(true);
+  const { id, feedProfile, feedImage, likeNum, content } = feedData;
   const [comments, setComments] = useState([]);
-  const commentView = () => {
-    setCommentsView((prev) => !prev);
+  const [showCommentsView, setShowCommntsView] = useState();
+  const commentRef = useRef('');
+  const [imgLoading, setImgLoading] = useState(true);
+
+  const setCommentsView = () => {
+    setShowCommntsView((prev) => !prev);
   };
-  const onSubmit = (e) => {
-    e.preventDefault();
+
+  const addComment = () => {
     setComments([
       ...comments,
-      { id: commentsCount, content: inputComment.current.value },
+      { id: comments.length, content: commentRef.current.value },
     ]);
-    setCommentsCount(commentsCount + 1);
-    inputComment.current.value = '';
+    commentRef.current.value = '';
   };
   return (
     <>
@@ -33,13 +32,7 @@ const Feeds = ({ feedData }) => {
         </FeedHead>
         <FeedMiddle>
           <FeedImage>
-            {
-              <img
-                src={feedImage}
-                onLoad={() => setImgLoading(false)}
-                onError={() => console.log('이미지 오류')}
-              />
-            }
+            {<img src={feedImage} onLoad={() => setImgLoading(false)} />}
           </FeedImage>
         </FeedMiddle>
         <FeedBottom>
@@ -47,22 +40,22 @@ const Feeds = ({ feedData }) => {
             <FeedLike>좋아요 {likeNum}개</FeedLike>
             <FeedContent>
               <ContentProfile>{feedProfile}</ContentProfile>
-              <span>{comment}</span>
+              <span>{content}</span>
             </FeedContent>
-            <Comment onClick={commentView}>
+            <Comment onClick={setCommentsView}>
               댓글 {comments.length}개 모두 보기
             </Comment>
             <Time>21시간 전</Time>
           </BottomWrap>
           <CommentInput>
-            <Form onSubmit={(e) => onSubmit(e)}>
-              <input type="text" ref={inputComment} placeholder="댓글 달기" />
-              <button>게시</button>
+            <Form onSubmit={(e) => e.preventDefault()}>
+              <input type="text" ref={commentRef} placeholder="댓글 달기" />
+              <button onClick={addComment}>게시</button>
             </Form>
           </CommentInput>
         </FeedBottom>
       </Feed>
-      {commentsView && (
+      {showCommentsView && (
         <Comments
           setCommentsView={setCommentsView}
           feedData={feedData}

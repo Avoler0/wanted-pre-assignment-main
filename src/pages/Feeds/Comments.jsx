@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 
 const Comments = ({
@@ -9,11 +9,8 @@ const Comments = ({
 }) => {
   const { id, feedProfile, feedImage, likeNum, comment } = feedData;
   const inputComment = useRef('');
-  const OverlayClick = () => {
-    setCommentsView((prev) => !prev);
-  };
-  const onSubmit = (e) => {
-    e.preventDefault();
+
+  const addComment = (e) => {
     setCommentsData([
       ...commentsData,
       { id: commentsData.length + 1, content: inputComment.current.value },
@@ -23,10 +20,10 @@ const Comments = ({
 
   return (
     <>
-      <OverLay onClick={OverlayClick}>
+      <OverLay onClick={() => setCommentsView((prev) => !prev)}>
         <div>X</div>
       </OverLay>
-      <Wrap id="wrapppppppppp">
+      <Wrap>
         <ImageFrame>
           <img src={feedImage} />
         </ImageFrame>
@@ -62,9 +59,9 @@ const Comments = ({
             <Time>21시간 전</Time>
           </Bottom>
           <CommentInput>
-            <Form onSubmit={(e) => onSubmit(e)}>
+            <Form onSubmit={(e) => e.preventDefault()}>
               <input type="text" ref={inputComment} placeholder="댓글 달기" />
-              <button>게시</button>
+              <button onClick={addComment}>게시</button>
             </Form>
           </CommentInput>
         </CommentFrame>

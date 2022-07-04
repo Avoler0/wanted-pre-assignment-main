@@ -1,11 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Feeds from './Feeds/Feeds';
 const Main = () => {
   const [feedData, setFeedData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-
+  // console.log('피드데이터', feedData);
   useEffect(() => {
     if (!localStorage.getItem('login_state'))
       location.href = `${location.origin}/login`;
